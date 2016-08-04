@@ -1,41 +1,48 @@
 <template>
     <div>
         <h3>Pipcożercy</h3>
-        <div v-for="person in people">
-            <person-form
-                    :person="person"
-                    :toppings="toppings"
-                    :remove="removePerson"
-            ></person-form>
+      <mdl-button raised colored @click="addPerson">Dodaj</mdl-button>
+
+      <div class="people-list">
+        <div v-for="person in people" class="person">
+          <person-form
+            :person="person"
+            :toppings="toppings"
+            :remove="removePerson"
+          ></person-form>
         </div>
-        <mdl-button raised colored @click="addPerson">Add person</mdl-button>
+      </div>
     </div>
 </template>
+
+
+
 <style>
-    body {
-    }
+  .person {
+    margin: 1em;
+  }
+
+  .people-list {
+    display: flex;
+    flex-wrap: wrap;
+  }
 </style>
 <script>
     import PersonForm from './PersonForm'
     export default {
-        data() {
-            return {
-                people: []
-            }
-        },
         components: {
             PersonForm
         },
         methods: {
             addPerson() {
-                this.people.push({});
+                this.people.push({})
             },
             removePerson(item) {
                 this.people.$remove(item)
             }
         },
         props: [
-            'toppings'
+            'toppings', 'people'
         ],
         events: {}
     }
